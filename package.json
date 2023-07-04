@@ -1,0 +1,48 @@
+{
+  "name": "@cookee/chrome_extension_cli",
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "bin":{
+    "chrome-cli":"bin/index.js"
+  },
+  "main": "lib/index.js",
+  "module": "./lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "ts-node -r tsconfig-paths/register --files ./index.ts",
+    "build:lib": "tsc --noEmit && vite build --mode=library",
+    "dev2": "tsnd -r tsconfig-paths/register --respawn ./index.ts #https://github.com/wclr/ts-node-dev/issues/314",
+    "dev": "nodemon --exec ts-node ./index.ts --project ./tsconfig.json",
+    "build2": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "publish:lib": "npm publish --access public"
+  },
+  "dependencies": {
+    "@cookee/moobox": "^0.0.3",
+    "commander": "^11.0.0",
+    "tsconfig-paths": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.3",
+    "less": "^4.1.3",
+    "less-loader": "^11.1.0",
+    "nodemon": "^2.0.22",
+    "sass": "^1.59.2",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.0"
+  }
+}
