@@ -1,6 +1,8 @@
-#!/usr/bin/env node
-
-import {program} from 'commander'
+#!/usr/bin/env npx ts-node --esm
+import EventEmitter from "events"
+console.log('EventEmitter', EventEmitter)
+import { Command } from "commander"
+const program = new Command()
 program
   .name('chrome-cli')
   .version('0.0.1')
@@ -11,7 +13,7 @@ program
 program
   .command('create <extension-name>')
   .description('创建插件的名称')
-  .option('-f, --force', '是否强制覆盖已经存在的项目')
+  .option('-l, --limit [limit]', '是否强制覆盖已经存在的项目')
   .action((name, option)=>{
     console.log('name=',name, 'option',option)
   })

@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    //"target": "es2016",
+    "module": "esnext",
+    "target": "ES6",
+    // "module": "commonjs",
     "noImplicitAny": false,
     "allowUmdGlobalAccess": true,
-    "module": "esnext",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -32,9 +34,9 @@
       "scripthost"
     ]
   },
-  "ts-node": {
-    "esm": true,
-  },
+  // "ts-node": {
+  //   "esm": true,
+  // },
   "typeRoots": [
     "typings"
   ],

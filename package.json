@@ -5,8 +5,8 @@
   "files": [
     "lib"
   ],
-  "bin":{
-    "chrome-cli":"bin/index.js"
+  "bin": {
+    "chrome-cli": "bin/index.js"
   },
   "main": "lib/index.js",
   "module": "./lib/index.js",
@@ -17,7 +17,8 @@
     }
   },
   "scripts": {
-    "build": "ts-node -r tsconfig-paths/register --files ./index.ts",
+    "build": "ts-node-esm -r tsconfig-paths/register --files ./index.ts",
+    "build:lib2": "tsc",
     "build:lib": "tsc --noEmit && vite build --mode=library",
     "dev2": "tsnd -r tsconfig-paths/register --respawn ./index.ts #https://github.com/wclr/ts-node-dev/issues/314",
     "dev": "nodemon --exec ts-node ./index.ts --project ./tsconfig.json",
@@ -27,10 +28,12 @@
   },
   "dependencies": {
     "@cookee/moobox": "^0.0.3",
-    "commander": "^11.0.0",
+    "commander": "8.3.0",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/node": "^18.15.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "clean-webpack-plugin": "^4.0.0",
