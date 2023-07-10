@@ -1,8 +1,6 @@
 #!/usr/bin/env npx ts-node --esm
-import EventEmitter from "events"
-console.log('EventEmitter', EventEmitter)
-import { Command } from "commander"
-const program = new Command()
+import { program } from "commander"
+//const program = new Command()
 program
   .name('chrome-cli')
   .version('0.0.1')
@@ -12,27 +10,30 @@ program
 
 program
   .command('create <extension-name>')
+  .option('-f, --force <boolean>', '是否覆盖已经存在的项目', false)
   .description('创建插件的名称')
-  .option('-l, --limit [limit]', '是否强制覆盖已经存在的项目')
-  .action((name, option)=>{
-    console.log('name=',name, 'option',option)
+  .action((name, option, cmd) => {
+    //const 
+    console.log('name=', name, 'option', option)
+    const opt = program.opts();
+    console.log('选项：', cmd.opts())
   })
 
 program
   .command('hello [st]')
-  .action(function(st,value){
-      hello(st,value);
+  .action(function (st, value) {
+    hello(st, value);
   })
 
-function hello(val,o){
-    console.log(val);
-    console.log(1);
-    console.log(o)
+function hello(val, o) {
+  console.log(val);
+  console.log(1);
+  console.log(o)
 }
 
-program
-    .option('-f --flag [value]','保存','ha')
-    .option('-t --tale [value]','保存')
+// program
+//   .option('-f --flag [value]', '保存', 'ha')
+//   .option('-t --tale [value]', '保存')
 
 program.parse(process.argv);
 

@@ -2,9 +2,7 @@
   "name": "@cookee/chrome_extension_cli",
   "version": "0.0.1",
   "type": "module",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "bin": {
     "chrome-cli": "bin/index.js"
   },
@@ -18,8 +16,8 @@
   },
   "scripts": {
     "build": "ts-node-esm -r tsconfig-paths/register --files ./index.ts",
-    "build:lib2": "tsc",
-    "build:lib": "tsc --noEmit && vite build --mode=library",
+    "build:lib": "tsc && npm link -G",
+    "build2:lib": "tsc --noEmit && vite build --mode=library",
     "dev2": "tsnd -r tsconfig-paths/register --respawn ./index.ts #https://github.com/wclr/ts-node-dev/issues/314",
     "dev": "nodemon --exec ts-node ./index.ts --project ./tsconfig.json",
     "build2": "vue-tsc --noEmit && vite build",

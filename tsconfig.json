@@ -17,6 +17,7 @@
     "emitDecoratorMetadata": true,
     "sourceMap": true,
     "baseUrl": "./",
+    "outDir": "bin",
     "removeComments": false,
     "typeRoots": [
       "./node_modules/@types/",
