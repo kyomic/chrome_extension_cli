@@ -9,6 +9,8 @@
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
+    // 支持import json
+    "resolveJsonModule":true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "skipLibCheck": true,
@@ -16,7 +18,7 @@
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "sourceMap": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "bin",
     "removeComments": false,
     "typeRoots": [
@@ -25,8 +27,8 @@
     ],
     "paths": {
       "@/*": [
-        "src/*"
-      ]
+        "./*"
+      ],
     },
     "lib": [
       "esnext",
@@ -35,20 +37,18 @@
       "scripthost"
     ]
   },
-  // "ts-node": {
-  //   "esm": true,
-  // },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "require": ["tsconfig-paths/register"]
+  },
   "typeRoots": [
     "typings"
   ],
   "include": [
+    "/**/*.ts",
     "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "**/*.ts",
-    "**/*.d.ts",
-    "**/*.tsx",
-    "src/**/*.vue",
+    "src/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -8,9 +8,10 @@ program
     .description('Chrome Extentsion 插件项目生成工具');
 program
     .command('create <extension-name>')
-    .option('-p, --port <number>', 'port number', '80')
+    .option('-f, --force <boolean>', '是否覆盖已经存在的项目', false)
     .description('创建插件的名称')
     .action((name, option, cmd) => {
+    //const 
     console.log('name=', name, 'option', option);
     const opt = program.opts();
     console.log('选项：', cmd.opts());
