@@ -46,7 +46,6 @@
     "typings"
   ],
   "include": [
-    "/**/*.ts",
     "src/**/*.ts",
     "src/**/*.d.ts"
   ],

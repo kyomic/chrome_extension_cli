@@ -1,5 +1,5 @@
 {
-  "name": "@cookee/chrome_extension_cli",
+  "name": "chrome-cli",
   "version": "0.0.1",
   "type": "module",
   "files": [
@@ -8,7 +8,7 @@
   "bin": {
     "chrome-cli": "bin/index.js"
   },
-  "main": "lib/index.js",
+  "main": "/src/index.ts",
   "module": "./lib/index.js",
   "_moduleAliases": {
     "@": [
@@ -23,11 +23,13 @@
   },
   "scripts": {
     "build_Bug": "ts-node -r tsconfig-paths/register --files ./src/index.ts",
-    "build": "ts-node --project tsconfig.json -r tsconfig-paths/register ./src/index.ts",
-    "build:lib": "tsc && npm link -G",
+    "build:xxx": "ts-node --project tsconfig.json -r tsconfig-paths/register ./src/index.ts",
+    "dev": "cross-env VITE_ENV=dev ts-node -r tsconfig-paths/register --files ./src/index.ts",
+    "build": "cross-env VITE_ENV=prod && node scripts/version.js && node scripts/build.js && npm link",
+    "build:lib": "tsc",
     "build2:lib": "tsc --noEmit && vite build --mode=library",
     "dev2": "tsnd -r tsconfig-paths/register --respawn ./index.ts #https://github.com/wclr/ts-node-dev/issues/314",
-    "dev": "nodemon --exec ts-node ./index.ts --project ./tsconfig.json",
+    "dev:mon": "nodemon --exec ts-node ./src/index.ts --project ./tsconfig.json",
     "build2": "vue-tsc --noEmit && vite build",
     "tsc": "tsc -p tsconfig.json",
     "preview": "vite preview",
@@ -36,7 +38,10 @@
   "dependencies": {
     "@cookee/moobox": "^0.0.3",
     "commander": "8.3.0",
-    "module-alias": "^2.2.3"
+    "fs-extra": "^11.1.1",
+    "inquirer": "^9.2.10",
+    "module-alias": "^2.2.3",
+    "terser": "^5.19.3"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
@@ -55,6 +60,6 @@
     "ts-node": "^10.8.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^4.9.5",
-    "vite": "^4.1.0"
+    "vite": "4.4.9"
   }
 }

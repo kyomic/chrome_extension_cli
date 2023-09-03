@@ -1,68 +1,57 @@
-import { defineConfig, loadEnv } from 'vite'
-import path, { resolve } from 'path'
+import { UserConfig, defineConfig, loadEnv } from 'vite';
+import { resolve } from 'path';
 
-// https://vitejs.dev/config/
-
-
-const defaultConfig = {
-  build: {
-    minify: "esbuild"
-  },
-  plugins: [
-
-  ],
+const config: UserConfig = {
+  root: __dirname,
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': resolve(__dirname, './src'),
     },
-  }
-}
-// see:http://www.5ityx.com/cate104/134659.html
-// NODE class找不到，see:https://github.com/vitejs/vite/issues/9703
-
-export default defineConfig(({ command, mode, ssrBuild }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  console.log('mode', mode)
-  console.log('command', command)
-  if (mode == 'library') {
-    return {
-      ...defaultConfig,
-      resolve: {
-        ...defaultConfig.resolve,
+  },
+  build: {
+    target: 'esnext',
+    outDir: resolve(__dirname, './bin'),
+    lib: {
+      entry: resolve(__dirname, './src/index.ts'),
+      formats: ['es'],
+      name: 'chromecli',
+    },
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: false,
       },
-      plugins: [
-        ...defaultConfig.plugins,
+      output: {
+        comments: 'all',
+      },
+    },
+    rollupOptions: {
+      external: [
+        'path',
+        'child_process',
+        'fs',
+        'fs-extra',
+        'url',
+        'module',
+        'commander',
+        'inquirer',
+        'chalk',
+        'download-git-repo',
       ],
+      output: {
+        strict: false,
+        entryFileNames: '[name].js',
+      },
+    },
+    ssr: false,
+    ssrManifest: false,
+    emptyOutDir: true,
+  },
+};
 
-      build: {
-        ...defaultConfig.build || {},
-        // support es5
-        // commonjsOptions: {
-        //   transformMixedEsModules: true, // https://github.com/chnejohnson/vue-dapp/issues/20
-        // },
-        outDir: 'bin',
-        // 不压缩，用于调试
-        minify: false,
-        lib: {
-          // Could also be a dictionary or array of multiple entry points
-          entry: resolve(__dirname, 'index.ts'),
-          name: '@cookee/moobox',
-          // the proper extensions will be added
-          fileName: 'index',
-        }
-      }
-
-    }
-  }
-  return {
-
-  }
-  if (command === "serve") {
-    return {
-      ...defaultConfig
-    }
-  } else {
-    return defaultConfig
-  }
-})
-
+const definedConfig = defineConfig(mode => {
+  const env = loadEnv(mode.mode, process.cwd());
+  console.log('env===', env);
+  return config;
+});
+export default definedConfig;

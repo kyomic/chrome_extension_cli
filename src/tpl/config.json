@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "templates": {
+    "default": {
+      "name": "默认",
+      "description": "这是一个啥啥模板"
+    },
+    "ad": {
+      "name": "广告",
+      "description": "禁用广告插件"
+    }
+  }
+}
