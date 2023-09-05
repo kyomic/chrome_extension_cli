@@ -1,0 +1,19 @@
+{
+  "name": "Getting Started Example",
+  "version": "1.0.1",
+  "description": "Build an Extension!",
+  "permissions": ["storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  // 新增popup弹框
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  // fix chrome.browserAction is undefind
+  // see:https://stackoverflow.com/questions/11494232/cannot-read-property-onclicked-of-undefined-when-using-chrome-action-or-chrome
+  //"browser_action": {},
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}
